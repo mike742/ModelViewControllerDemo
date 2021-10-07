@@ -1,0 +1,25 @@
+﻿@model IEnumerable<Vendor>
+
+<h2>Vendors</h2>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Contact</th>
+            <th>Phone</th>
+            <th>State</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var v in Model)
+        {
+        <tr>
+            <td> @v.V_name</td>
+            <td> @v.V_contact</td>
+            <td> @v.V_phone</td>
+            <td> @v.V_state</td>
+        </tr>
+        }
+    </tbody>
+</table>
