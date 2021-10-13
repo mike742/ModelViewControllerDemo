@@ -10,5 +10,6 @@ namespace ModelViewControllerDemo.Data
     {
         IEnumerable<Vendor> GetAll();
         Vendor GetById(int id);
+        void Create(Vendor vendor);
     }
 }

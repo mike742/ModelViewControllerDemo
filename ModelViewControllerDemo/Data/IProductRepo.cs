@@ -10,5 +10,6 @@ namespace ModelViewControllerDemo.Data
     {
         IEnumerable<Product> GetAll();
         Product GetById(string id);
+        void Create(Product product);
     }
 }

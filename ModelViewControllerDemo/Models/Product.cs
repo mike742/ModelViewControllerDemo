@@ -15,5 +15,6 @@ namespace ModelViewControllerDemo.Models
         public double P_Price { get; set; }
         public double P_Discount { get; set; }
         public int? V_code { get; set; }
+        public Vendor Vendor { get; set; }
     }
 }

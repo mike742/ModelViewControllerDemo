@@ -34,7 +34,7 @@
                 @Html.DisplayNameFor(model => model.P_Discount)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.V_code)
+                @Html.DisplayNameFor(model => model.Vendor.V_name)
             </th>
             <th></th>
         </tr>
@@ -69,7 +69,7 @@
                     @Html.DisplayFor(modelItem => item.P_Discount)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.V_code)
+                    @Html.DisplayFor(modelItem => item.Vendor.V_name)
                 </td>
                 <td>
                     @*@Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |

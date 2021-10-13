@@ -23,6 +23,13 @@ namespace ModelViewControllerDemo.Data.MockRepos
             new Vendor { V_code = 25595, V_name = "Rubicon Systems",V_contact = "Orton",        V_AreaCode = 904, V_phone = "456-0092", V_state = "FL", V_order = "Y" },
         };
 
+        public void Create(Vendor vendor)
+        {
+            int code = _vendors.Max(v => v.V_code) + 1;
+            vendor.V_code = code;
+            _vendors.Add(vendor);
+        }
+
         public IEnumerable<Vendor> GetAll()
         {
             return _vendors;

@@ -21,5 +21,18 @@ namespace ModelViewControllerDemo.Controllers
             var vendors = _repo.GetAll();
             return View(vendors);
         }
+
+        [HttpGet]
+        public ActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Create(Vendor vendor)
+        {
+            _repo.Create(vendor);
+            return RedirectToAction("Index");
+        }
     }
 }
