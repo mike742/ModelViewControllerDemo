@@ -1,19 +1,20 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using ModelViewControllerDemo.Data;
-using ModelViewControllerDemo.Data.MockRepos;
-using ModelViewControllerDemo.Data.SqlRepos;
+using Microsoft.Extensions.Logging;
+using Microsoft.OpenApi.Models;
+using RestAPIDemo.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ModelViewControllerDemo
+namespace RestAPIDemo
 {
     public class Startup
     {
@@ -27,16 +28,15 @@ namespace ModelViewControllerDemo
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllersWithViews();
 
-            services.AddDbContext<AppDbContext>(o =>
+            services.AddControllers();
+            services.AddSwaggerGen(c =>
             {
-                var cs = Configuration.GetConnectionString("Default");
-                o.UseSqlServer(cs);
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "RestAPIDemo", Version = "v1" });
             });
 
-            services.AddScoped<IVendorRepo, SqlVendorRepo>();
-            services.AddScoped<IProductRepo, MockProductRepo>();
+            services.AddDbContext<AppDbContexxt>(op => 
+                op.UseSqlServer(Configuration.GetConnectionString("Default")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -45,15 +45,11 @@ namespace ModelViewControllerDemo
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                app.UseSwagger();
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "RestAPIDemo v1"));
             }
-            else
-            {
-                app.UseExceptionHandler("/Home/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-                app.UseHsts();
-            }
+
             app.UseHttpsRedirection();
-            app.UseStaticFiles();
 
             app.UseRouting();
 
@@ -61,9 +57,7 @@ namespace ModelViewControllerDemo
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapControllers();
             });
         }
     }

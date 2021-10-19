@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31424.327
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModelViewControllerDemo", "ModelViewControllerDemo\ModelViewControllerDemo.csproj", "{885B0EED-51F7-4423-980B-253B8E980667}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ModelViewControllerDemo", "ModelViewControllerDemo\ModelViewControllerDemo.csproj", "{885B0EED-51F7-4423-980B-253B8E980667}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RestAPIDemo", "RestAPIDemo\RestAPIDemo.csproj", "{D59DBCAE-4F75-4DD7-8BEF-CFA62AC2F762}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{885B0EED-51F7-4423-980B-253B8E980667}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{885B0EED-51F7-4423-980B-253B8E980667}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{885B0EED-51F7-4423-980B-253B8E980667}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D59DBCAE-4F75-4DD7-8BEF-CFA62AC2F762}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D59DBCAE-4F75-4DD7-8BEF-CFA62AC2F762}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D59DBCAE-4F75-4DD7-8BEF-CFA62AC2F762}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D59DBCAE-4F75-4DD7-8BEF-CFA62AC2F762}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
