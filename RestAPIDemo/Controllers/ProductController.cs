@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using RestAPIDemo.Data;
 using RestAPIDemo.Models;
+using RestAPIDemo.ModelsDto;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +16,8 @@ namespace RestAPIDemo.Controllers
     public class ProductController : ControllerBase
     {
         private readonly AppDbContexxt _context;
-
+        private readonly Mapper _mapper = new Mapper();
+    
         public ProductController(AppDbContexxt context)
         {
             _context = context;
@@ -23,28 +25,51 @@ namespace RestAPIDemo.Controllers
 
         // GET: api/<ProductController>
         [HttpGet]
-        public IEnumerable<Product> Get()
+        public ActionResult<IEnumerable<Product>> Get()
         {
-            return _context.Products.ToList();
+            return Ok(_context.Products.ToList());
         }
 
         // GET api/<ProductController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public ActionResult<Product> Get(int id)
         {
-            return "value";
+            var prod = _context.Products.FirstOrDefault(p => p.Id == id);
+
+            if (prod != null)
+            {
+                return Ok(prod);
+            }
+            return NotFound();
         }
 
         // POST api/<ProductController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public ActionResult Post(ProductDto value)
         {
+            Product prodToAdd = _mapper.Map(value);
+
+            _context.Add(prodToAdd);
+            _context.SaveChanges();
+            
+            return Ok();
         }
 
         // PUT api/<ProductController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public ActionResult Put(int id, ProductDto value)
         {
+            var prodFromDb = _context.Products.FirstOrDefault(p => p.Id == id);
+
+            if (prodFromDb == null) return NotFound();
+
+            prodFromDb.Name = value.Name;
+            prodFromDb.Price = value.Price;
+
+            // _context.Update(prodFromDb);
+            _context.SaveChanges();
+
+            return NoContent();
         }
 
         // DELETE api/<ProductController>/5
