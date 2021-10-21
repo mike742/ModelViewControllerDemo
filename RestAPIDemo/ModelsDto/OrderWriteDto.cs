@@ -5,9 +5,10 @@ using System.Threading.Tasks;
 
 namespace RestAPIDemo.ModelsDto
 {
-    public class ProductDto // WriteDto
+    public class OrderWriteDto
     {
         public string Name { get; set; }
-        public double Price { get; set; }
+        public DateTime Date { get; set; }
+        public IEnumerable<int> ProductIds { get; set; }
     }
 }

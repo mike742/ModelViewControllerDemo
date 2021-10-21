@@ -5,8 +5,9 @@ using System.Threading.Tasks;
 
 namespace RestAPIDemo.ModelsDto
 {
-    public class ProductDto // WriteDto
+    public class ProductReadDto
     {
+        public int Id { get; set; }
         public string Name { get; set; }
         public double Price { get; set; }
     }

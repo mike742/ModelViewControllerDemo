@@ -59,7 +59,8 @@ namespace RestAPIDemo.Controllers
         [HttpPut("{id}")]
         public ActionResult Put(int id, ProductDto value)
         {
-            var prodFromDb = _context.Products.FirstOrDefault(p => p.Id == id);
+            var prodFromDb = _context.Products
+                .FirstOrDefault(p => p.Id == id);
 
             if (prodFromDb == null) return NotFound();
 
@@ -74,8 +75,17 @@ namespace RestAPIDemo.Controllers
 
         // DELETE api/<ProductController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public ActionResult Delete(int id)
         {
+            var prodFromDb = _context.Products
+                .FirstOrDefault(p => p.Id == id);
+
+            if (prodFromDb == null) return NotFound();
+
+            _context.Products.Remove(prodFromDb);
+            _context.SaveChanges();
+
+            return NoContent();
         }
     }
 }
